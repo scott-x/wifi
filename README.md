@@ -1,1 +1,3 @@
 # wifi
+
+get wifi name
