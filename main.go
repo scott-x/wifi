@@ -1,10 +1,28 @@
 package main
 
 import (
-	"fmt"
-	"github.com/yelinaung/wifi-name"
+	"runtime"
+
+	"github.com/play175/wifiNotifier"
+	wifiname "github.com/yelinaung/wifi-name"
 )
 
-func main() {
-	fmt.Println("【 wifi name 】=> ", wifiname.WifiName())
+func GetSSID() string {
+	var wifi string
+	if runtime.GOOS == "windows" {
+		wifi = getSSIDForWindows()
+	} else {
+		wifi = getSSIDForMacos()
+	}
+	return wifi
+}
+
+//for windows
+func getSSIDForWindows() string {
+	return wifiNotifier.GetCurrentSSID()
+}
+
+//for macos
+func getSSIDForMacos() string {
+	return wifiname.WifiName()
 }
